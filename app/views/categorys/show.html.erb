@@ -1,0 +1,49 @@
+<p>
+  <strong>Name:</strong>
+  <%= @category.name %>
+</p>
+
+<h2>Song</h2>
+<% @category.songs.each do |c| %>
+  <p>
+    <strong>Name:</strong>
+    <%= c.name %>
+  </p>
+
+  <p>
+    <strong>Artist:</strong>
+    <%= c.artist %>
+  </p>
+  <p>
+    <strong>Album:</strong>
+    <%= c.album %>
+  </p>
+  <p>
+  <%= link_to 'Eliminar Cancion', category_song_path(c),
+               :method => :delete,
+               :data => { :confirm => '¿Estás seguro?' } %>
+</p>
+<% end %>
+
+
+<h2>Add a Song:</h2>
+<%= form_for([@category, @category.songs.build]) do |c| %>
+  <p>
+    <%= c.label :name %><br />
+    <%= c.text_field :name %>
+  </p>
+  <p>
+    <%= c.label :artist %><br />
+    <%= c.text_area :artist %>
+  </p>
+   <p>
+    <%= c.label :album %><br />
+    <%= c.text_area :album %>
+  </p>
+  <p>
+    <%= c.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Edit Category', edit_category_path(@category) %> |
+<%= link_to 'Back to Categorys', categorys_path %>
